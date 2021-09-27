@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/playceholder.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Player2" type="RigidBody2D"]
+position = Vector2( 100, 100 )
+mode = 2
+gravity_scale = 3.24
+contacts_reported = 1
+script = ExtResource( 1 )
+move_right = "move_right2"
+move_left = "move_left2"
+move_up = "move_up2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 4, 4 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0.952941, 1, 1 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 2 )
+flip_h = true
