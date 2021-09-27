@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Platbox"
+run/main_scene="res://Assets/Scenes/Fight.tscn"
 config/icon="res://icon.png"
 
 [gdnative]
