@@ -15,6 +15,7 @@ export var attack = "attack";
 
 onready var _animated_sprite = $AnimatedSprite
 onready var _hitbox = $Area2D
+onready var _animator = $AnimationPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,7 +31,8 @@ func _integrate_forces(state):
 	
 	if Input.is_action_just_pressed(attack):
 		state.apply_central_impulse(Vector2.RIGHT * jump_strength);
-		_animated_sprite.play("attack")
+		#_animated_sprite.play("attack")
+		_animator.play("TestAnim")
 		
 	
 	var grounded = state.get_contact_count() > 0;

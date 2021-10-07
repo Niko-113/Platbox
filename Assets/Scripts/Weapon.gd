@@ -19,4 +19,5 @@ func _process(delta):
 
 
 func _on_player_hit(body):
+	get_tree().reload_current_scene()
 	print_debug(body.name + " was hit!")
