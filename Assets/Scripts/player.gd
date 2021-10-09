@@ -1,16 +1,19 @@
 extends RigidBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var speed = 15;
 var max_speed = 250;
 var jump_strength = 300;
 
-export var move_right = "move_right";
-export var move_left = "move_left";
-export var move_up = "move_up";
+export var move_right = "move_right"
+export var move_left = "move_left"
+export var move_up = "move_up"
+export var attack = "attack"
+export(NodePath) var opponent_path
+
+onready var _hitbox = $Area2D
+onready var _animator = $AnimationPlayer
+onready var _sprite = $Sprite
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,10 +22,18 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func _process(delta):
+	var _opponent = get_node(opponent_path)
+	if  _opponent.position.x < self.position.x:
+		_sprite.flip_v = true
+	else:
+		_sprite.flip_v = false
 func _integrate_forces(state):
+	var _opponent = get_node(opponent_path)
+	self.look_at(Vector2(_opponent.position.x, self.position.y))
+	
+	if Input.is_action_just_pressed(attack):
+		_animator.play("PlayerAttackAnim")
 	
 	var grounded = state.get_contact_count() > 0;
 	
@@ -42,4 +53,3 @@ func _integrate_forces(state):
 	vec.x = max(vec.x, -max_speed);
 	
 	state.set_linear_velocity(vec);
-	
