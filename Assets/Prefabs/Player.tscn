@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/playceholder.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Scripts/Weapon.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Scripts/weapon.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Sprites/playceholderAttack2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Animations/PlayerAttackAnim.tres" type="Animation" id=5]
 
@@ -10,7 +10,7 @@
 
 [sub_resource type="RectangleShape2D" id=2]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -72,5 +72,5 @@ anims/TestAnim = ExtResource( 5 )
 visible = false
 modulate = Color( 0.894118, 0, 0, 1 )
 scale = Vector2( 5, 5 )
-frames = SubResource( 4 )
+frames = SubResource( 3 )
 playing = true

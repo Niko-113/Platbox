@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/playceholder.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Scripts/Weapon.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Scripts/weapon.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Sprites/playceholderAttack2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Animations/PlayerAttackAnim.tres" type="Animation" id=5]
 
@@ -55,11 +55,10 @@ shape = SubResource( 1 )
 modulate = Color( 0, 0.952941, 1, 1 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 2 )
-flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
-position = Vector2( -76.1786, 4.52475 )
+position = Vector2( 77.8214, 2.52475 )
 scale = Vector2( 3.12409, 1.0525 )
 monitoring = false
 script = ExtResource( 3 )
