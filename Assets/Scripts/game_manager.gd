@@ -7,9 +7,7 @@ var root
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
 	_setup()
-	
 
 func _setup():
 	points_1 = 0
@@ -17,6 +15,17 @@ func _setup():
 	print_debug("EEEEE")
 	root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+	
+	
+func next_round():
+	get_tree().paused = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	get_tree().paused = false
+	var player_1 = get_node("/root/Fight/Player")
+	player_1.respawn()
+	var player_2 = get_node("/root/Fight/Player2")
+	player_2.respawn()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -33,3 +42,6 @@ func addScore(player):
 	if pointer >= 5:
 		get_tree().reload_current_scene()
 		_setup()
+	else:
+		# Start the next round
+		next_round()

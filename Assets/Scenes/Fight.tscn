@@ -14,6 +14,7 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 opponent_path = NodePath("../Player2")
+respawn_path = NodePath("../RespawnPoints/Respawn1")
 
 [node name="Ground" type="KinematicBody2D" parent="."]
 position = Vector2( 45, 444 )
@@ -31,6 +32,7 @@ texture = ExtResource( 1 )
 position = Vector2( 862.057, 130.222 )
 attack = "attack2"
 opponent_path = NodePath("../Player")
+respawn_path = NodePath("../RespawnPoints/Respawn2")
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
@@ -55,3 +57,14 @@ margin_left = 750.0
 margin_top = 22.2487
 margin_bottom = 36.2487
 text = "hello world"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RespawnPoints" type="Node2D" parent="."]
+position = Vector2( 0.98703, 0.463028 )
+
+[node name="Respawn1" type="Node2D" parent="RespawnPoints"]
+position = Vector2( 192.333, 197.99 )
+
+[node name="Respawn2" type="Node2D" parent="RespawnPoints"]
+position = Vector2( 832.96, 207.024 )
