@@ -6,7 +6,7 @@
 [resource]
 resource_name = "TestAnim"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Area2D:monitoring")
+tracks/0/path = NodePath("Weapon:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,7 +18,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Area2D:visible")
+tracks/1/path = NodePath("Weapon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
