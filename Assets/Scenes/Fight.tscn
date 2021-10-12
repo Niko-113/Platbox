@@ -47,7 +47,7 @@ margin_left = 150.0
 margin_top = 25.0
 margin_right = 71.0
 margin_bottom = 14.0
-text = "hello world"
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -56,7 +56,31 @@ __meta__ = {
 margin_left = 750.0
 margin_top = 22.2487
 margin_bottom = 36.2487
-text = "hello world"
+text = "0"
+
+[node name="Results" type="Control" parent="Control"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="WinnerText" type="Label" parent="Control/Results"]
+margin_left = 452.669
+margin_top = 208.072
+margin_right = 552.669
+margin_bottom = 222.072
+text = "Player 1 wins!"
+align = 1
+uppercase = true
+
+[node name="RestartButton" type="Button" parent="Control/Results"]
+margin_left = 476.107
+margin_top = 230.062
+margin_right = 533.107
+margin_bottom = 250.062
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Timer" type="Timer" parent="."]
 

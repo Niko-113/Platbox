@@ -10,6 +10,8 @@ func _ready():
 	_setup()
 
 func _setup():
+	get_tree().reload_current_scene()
+	Engine.time_scale = 1
 	points_1 = 0
 	points_2 = 0
 	print_debug("EEEEE")
@@ -27,10 +29,6 @@ func next_round():
 	player_2.respawn()
 	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func addScore(player):
 	# Should figure out a way to make this less hard-coded...
 	var score = get_node("/root/Fight/Control/Score" + str(player))
@@ -40,8 +38,19 @@ func addScore(player):
 	score.text = str(pointer)
 	print_debug(pointer)
 	if pointer >= 5:
-		get_tree().reload_current_scene()
-		_setup()
+		game_over(player)
 	else:
 		# Start the next round
 		next_round()
+
+func game_over(player):
+	var results = get_node("/root/Fight/Control/Results")
+	results.visible = true
+	Engine.time_scale = 0
+	
+	var winner_text = get_node("/root/Fight/Control/Results/WinnerText")
+	winner_text.text = "Player " + str(player) + " wins!"
+	
+	var restart_button = get_node("/root/Fight/Control/Results/RestartButton")
+	restart_button.connect("pressed", self, "_setup")
+	
