@@ -10,8 +10,9 @@ export var move_left = "move_left"
 export var move_up = "move_up"
 export var attack = "attack"
 export(NodePath) var opponent_path
+export(NodePath) var respawn_path
 
-onready var _hitbox = $Area2D
+onready var _hitbox = $Weapon
 onready var _animator = $AnimationPlayer
 onready var _sprite = $Sprite
 
@@ -53,3 +54,9 @@ func _integrate_forces(state):
 	vec.x = max(vec.x, -max_speed);
 	
 	state.set_linear_velocity(vec);
+
+func respawn():
+	var respawn_point = get_node(respawn_path)
+	self.position = respawn_point.position
+	self.linear_velocity = Vector2()
+	_animator.advance(1)

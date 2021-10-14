@@ -10,7 +10,7 @@
 
 [sub_resource type="RectangleShape2D" id=2]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -48,20 +48,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Weapon" type="Area2D" parent="."]
 visible = false
 position = Vector2( 76.8214, 1.52475 )
 scale = Vector2( 3.12409, 1.0525 )
 monitoring = false
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
 shape = SubResource( 2 )
 
-[node name="HitboxSprite" type="Sprite" parent="Area2D"]
-show_behind_parent = true
+[node name="HitboxSprite" type="Sprite" parent="Weapon"]
 position = Vector2( -0.226349, -4.36695 )
 scale = Vector2( 1.28293, 1.62985 )
+z_index = 1
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -72,5 +72,5 @@ anims/TestAnim = ExtResource( 5 )
 visible = false
 modulate = Color( 0.894118, 0, 0, 1 )
 scale = Vector2( 5, 5 )
-frames = SubResource( 3 )
+frames = SubResource( 4 )
 playing = true

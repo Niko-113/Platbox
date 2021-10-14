@@ -1,10 +1,7 @@
 extends Node
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+export var player_no = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,5 +16,7 @@ func _process(delta):
 
 
 func _on_player_hit(body):
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
 	print_debug(body.name + " was hit!")
+	var manager = get_node("/root/GameManager")
+	manager.addScore(player_no)

@@ -24,6 +24,10 @@ config/name="Platbox"
 run/main_scene="res://Assets/Scenes/Fight.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameManager="*res://Assets/Scripts/game_manager.gd"
+
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
