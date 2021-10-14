@@ -45,6 +45,13 @@ scale = Vector2( 1, 25.08 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/LeftWall"]
 shape = SubResource( 2 )
 
+[node name="RightWall" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 1036.09, 164.259 )
+scale = Vector2( 1, 25.08 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/RightWall"]
+shape = SubResource( 2 )
+
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
