@@ -58,3 +58,5 @@ func _integrate_forces(state):
 func respawn():
 	var respawn_point = get_node(respawn_path)
 	self.position = respawn_point.position
+	self.linear_velocity = Vector2()
+	_animator.advance(1)
