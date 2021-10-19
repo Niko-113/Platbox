@@ -37,7 +37,7 @@ func addScore(player):
 	pointer = get(pointer)
 	score.text = str(pointer)
 	print_debug(pointer)
-	if pointer >= 5:
+	if pointer >= 7:
 		game_over(player)
 	else:
 		# Start the next round

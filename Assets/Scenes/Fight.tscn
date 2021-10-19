@@ -117,6 +117,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control" type="Control" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/Control"]
+margin_left = 206.0
+margin_top = 18.0
+margin_right = 413.0
+margin_bottom = 66.0
+text = "PLAYER 1 (RED): WASD is [MOVE]
+
+SPACE is [ATTACK]"
+
+[node name="Label2" type="Label" parent="Control/Control"]
+margin_left = 471.0
+margin_top = 17.0
+margin_right = 729.0
+margin_bottom = 65.0
+text = "PLAYER 2 (BLUE): ARROW KEYS is [MOVE]
+
+CTRL is [ATTACK]"
+
 [node name="Timer" type="Timer" parent="."]
 
 [node name="RespawnPoints" type="Node2D" parent="."]
