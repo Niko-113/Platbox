@@ -5,6 +5,7 @@ var speed = 250
 var jump_strength = -500
 var gravity = 1000
 
+
 var jumping = false
 var velocity = Vector2()
 
@@ -72,17 +73,27 @@ func _physics_process(delta):
 	var jump = Input.is_action_just_pressed(move_up);
 	
 	velocity.x = (int(x_right) - int(x_left)) * speed
-	if is_on_floor():
-		jumping = false
-		velocity.y = 0
-	if jump and is_on_floor():
-		#jumping = true
-		velocity.y = jump_strength
+#	if is_on_floor():
+#		velocity.y = 0
+#	if jump and is_on_floor():
+#		velocity.y = jump_strength
+#	velocity.y += gravity * delta
+#	move_and_slide(velocity, Vector2(0, -1))
 		
 	
-	velocity.y += gravity * delta
 	
-	move_and_slide(velocity, Vector2(0, -1))
+	velocity.y += gravity * delta
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		move_and_collide(velocity.slide(collision.normal) * delta)
+		if collision.collider.position.y > self.position.y:
+			if jump:
+				velocity.y = jump_strength
+		# TODO: Fix gravity storage on player stacking
+		#velocity.y = 0
+		#velocity = velocity.slide(collision.normal)
+
+
 
 func respawn():
 	var respawn_point = get_node(respawn_path)

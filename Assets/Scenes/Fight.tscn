@@ -15,7 +15,7 @@ __meta__ = {
 
 [node name="Terrain" type="Node2D" parent="."]
 
-[node name="Ground" type="KinematicBody2D" parent="Terrain"]
+[node name="Ground" type="StaticBody2D" parent="Terrain"]
 position = Vector2( 45, 444 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Ground"]
