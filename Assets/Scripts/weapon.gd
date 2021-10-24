@@ -16,6 +16,8 @@ func _process(delta):
 
 
 func _on_player_hit(body):
+	if not "Player" in body.name:
+		return
 	#get_tree().reload_current_scene()
 	print_debug(body.name + " was hit!")
 	var manager = get_node("/root/GameManager")
