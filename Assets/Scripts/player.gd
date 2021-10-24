@@ -82,16 +82,19 @@ func _physics_process(delta):
 		
 	
 	
-	velocity.y += gravity * delta
+	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		move_and_collide(velocity.slide(collision.normal) * delta)
-		if collision.collider.position.y > self.position.y:
+		if collision.normal.y == -1:
 			if jump:
 				velocity.y = jump_strength
-		# TODO: Fix gravity storage on player stacking
-		#velocity.y = 0
-		#velocity = velocity.slide(collision.normal)
+		else:
+			velocity.y += gravity * delta
+	else:
+		velocity.y += gravity * delta
+		
+pass
 
 
 
