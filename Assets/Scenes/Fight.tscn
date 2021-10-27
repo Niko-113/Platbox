@@ -139,12 +139,12 @@ position = Vector2( 190.919, 341.754 )
 [node name="Respawn2" type="Node2D" parent="RespawnPoints"]
 position = Vector2( 831.546, 342.788 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 198.77, 228.45 )
 opponent_path = NodePath("../Player2")
 respawn_path = NodePath("../RespawnPoints/Respawn1")
 
-[node name="Sprite" parent="Player" index="1"]
+[node name="Sprite" parent="Player1" index="1"]
 modulate = Color( 1, 0, 0, 1 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]
@@ -153,7 +153,8 @@ move_right = "move_right2"
 move_left = "move_left2"
 move_up = "move_up2"
 attack = "attack2"
-opponent_path = NodePath("../Player")
+dash_input = "dash2"
+opponent_path = NodePath("../Player1")
 respawn_path = NodePath("../RespawnPoints/Respawn2")
 
 [node name="Sprite" parent="Player2" index="1"]
@@ -162,5 +163,5 @@ modulate = Color( 0, 0.952941, 1, 1 )
 [node name="Weapon" parent="Player2" index="2"]
 player_no = 2
 
-[editable path="Player"]
+[editable path="Player1"]
 [editable path="Player2"]

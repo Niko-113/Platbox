@@ -23,7 +23,7 @@ func next_round():
 	get_tree().paused = true
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_tree().paused = false
-	var player_1 = get_node("/root/Fight/Player")
+	var player_1 = get_node("/root/Fight/Player1")
 	player_1.respawn()
 	var player_2 = get_node("/root/Fight/Player2")
 	player_2.respawn()
