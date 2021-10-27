@@ -5,6 +5,7 @@
 
 [resource]
 resource_name = "TestAnim"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Weapon:monitoring")
 tracks/0/interp = 1
@@ -36,7 +37,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 1 ), ExtResource( 2 ) ]
