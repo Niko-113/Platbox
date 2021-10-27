@@ -49,16 +49,22 @@ func _physics_process(delta):
 	var x_left = Input.is_action_pressed(move_left)
 	var jump = Input.is_action_just_pressed(move_up)
 	var dash = Input.is_action_just_pressed(dash_input)
+	var attacking = _animator.current_animation == "PlayerAttackAnim"
 	
-
-	
-	if not dashing:
-		direction = int(x_right) - int(x_left)
-		velocity.x = direction * speed
-	
-	if dash and not dashing:
-		dashing = true
-		velocity.x = dash_strength * direction
+	# TODO: Replace all of this with a proper state machine
+	if not attacking:
+		if not dashing:
+			direction = int(x_right) - int(x_left)
+			velocity.x = direction * speed
+		
+		if dash and not dashing:
+			dashing = true
+			velocity.x = dash_strength * direction
+	elif is_on_ground():	
+		if velocity.x * direction > 0:
+			velocity.x -= decel * direction
+		else:
+			velocity.x = 0
 	
 	if dashing:
 		velocity.x -= decel * direction
@@ -71,7 +77,7 @@ func _physics_process(delta):
 		move_and_collide(velocity.slide(collision.normal) * delta)
 		var pancake = is_pancaked()
 		if is_on_ground() and not pancake:
-			if jump:
+			if jump and not attacking:
 				velocity.y = jump_strength
 		elif pancake and not is_on_ground():
 			velocity.y = abs(pancake.collider_velocity.y)
