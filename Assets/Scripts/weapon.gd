@@ -16,7 +16,7 @@ func _process(delta):
 
 
 func _on_player_hit(body):
-	if not "Player" in body.name:
+	if not "Player" in body.name or str(player_no) in body.name:
 		return
 	#get_tree().reload_current_scene()
 	print_debug(body.name + " was hit!")

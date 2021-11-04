@@ -3,16 +3,21 @@ extends KinematicBody2D
 
 var speed = 250
 var jump_strength = -500
+var dash_strength = speed * 2.5
 var gravity = 1000
+var decel = 20
 
 
+var direction = 0
 var jumping = false
+var dashing = false
 var velocity = Vector2()
 
 export var move_right = "move_right"
 export var move_left = "move_left"
 export var move_up = "move_up"
 export var attack = "attack"
+export var dash_input = "dash"
 export(NodePath) var opponent_path
 export(NodePath) var respawn_path
 
@@ -40,30 +45,39 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed(attack):
 		_animator.play("PlayerAttackAnim")
 	
-	var x_right = Input.is_action_pressed(move_right);
-	var x_left = Input.is_action_pressed(move_left);
-	var jump = Input.is_action_just_pressed(move_up);
+	var x_right = Input.is_action_pressed(move_right)
+	var x_left = Input.is_action_pressed(move_left)
+	var jump = Input.is_action_just_pressed(move_up)
+	var dash = Input.is_action_just_pressed(dash_input)
+	var attacking = _animator.current_animation == "PlayerAttackAnim"
 	
-	velocity.x = (int(x_right) - int(x_left)) * speed
-#	if is_on_floor():
-#		velocity.y = 0
-#	if jump and is_on_floor():
-#		velocity.y = jump_strength
-#	velocity.y += gravity * delta
-#	move_and_slide(velocity, Vector2(0, -1))
+	# TODO: Replace all of this with a proper state machine
+	if not attacking:
+		if not dashing:
+			direction = int(x_right) - int(x_left)
+			velocity.x = direction * speed
+		
+		if dash and not dashing:
+			dashing = true
+			velocity.x = dash_strength * direction
+	elif is_on_ground():	
+		if velocity.x * direction > 0:
+			velocity.x -= decel * direction
+		else:
+			velocity.x = 0
 	
+	if dashing:
+		velocity.x -= decel * direction
+		if (velocity.x * direction <= speed * 0.75):
+			dashing = false
 	
-#	if is_on_ground() and jump:
-#		velocity.y = jump_strength
-	#velocity.y += gravity * delta
-	#is_pancaked()
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		move_and_collide(velocity.slide(collision.normal) * delta)
 		var pancake = is_pancaked()
 		if is_on_ground() and not pancake:
-			if jump:
+			if jump and not attacking:
 				velocity.y = jump_strength
 		elif pancake and not is_on_ground():
 			velocity.y = abs(pancake.collider_velocity.y)
