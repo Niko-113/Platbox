@@ -18,6 +18,7 @@ export var move_left = "move_left"
 export var move_up = "move_up"
 export var attack = "attack"
 export var dash_input = "dash"
+export var drop_input = "drop"
 export(NodePath) var opponent_path
 export(NodePath) var respawn_path
 
@@ -50,6 +51,9 @@ func _physics_process(delta):
 	var jump = Input.is_action_just_pressed(move_up)
 	var dash = Input.is_action_just_pressed(dash_input)
 	var attacking = _animator.current_animation == "PlayerAttackAnim"
+	
+	if Input.is_action_pressed(drop_input) and is_on_ground():
+		self.position.y += 1
 	
 	# TODO: Replace all of this with a proper state machine
 	if not attacking:

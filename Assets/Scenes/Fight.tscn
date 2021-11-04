@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Sprites/playceholder.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/Player Type-K.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sprites/instructions.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Prefabs/Platform.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 638, 39 )
@@ -52,6 +53,9 @@ position = Vector2( -161.633, 0.611235 )
 scale = Vector2( 1, 2.21531 )
 shape = SubResource( 2 )
 
+[node name="Platform" parent="Terrain" instance=ExtResource( 4 )]
+position = Vector2( 500, 300 )
+
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -85,33 +89,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Results" type="Control" parent="Control"]
+[node name="Instructions" type="Control" parent="Control"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
-
-[node name="WinnerText" type="Label" parent="Control/Results"]
-margin_left = 452.669
-margin_top = 208.072
-margin_right = 552.669
-margin_bottom = 222.072
-text = "Player 1 wins!"
-align = 1
-uppercase = true
-
-[node name="RestartButton" type="Button" parent="Control/Results"]
-margin_left = 476.107
-margin_top = 230.062
-margin_right = 533.107
-margin_bottom = 250.062
-text = "Restart"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Instructions" type="Control" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="Control/Instructions"]
 margin_left = 47.2599
@@ -160,6 +144,30 @@ margin_top = 59.3323
 margin_right = 667.808
 margin_bottom = 287.332
 
+[node name="Results" type="Control" parent="Control"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="WinnerText" type="Label" parent="Control/Results"]
+margin_left = 452.669
+margin_top = 208.072
+margin_right = 552.669
+margin_bottom = 222.072
+text = "Player 1 wins!"
+align = 1
+uppercase = true
+
+[node name="RestartButton" type="Button" parent="Control/Results"]
+margin_left = 476.107
+margin_top = 230.062
+margin_right = 533.107
+margin_bottom = 250.062
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Timer" type="Timer" parent="."]
 
 [node name="RespawnPoints" type="Node2D" parent="."]
@@ -186,6 +194,7 @@ move_left = "move_left2"
 move_up = "move_up2"
 attack = "attack2"
 dash_input = "dash2"
+drop_input = "drop2"
 opponent_path = NodePath("../Player1")
 respawn_path = NodePath("../RespawnPoints/Respawn2")
 
