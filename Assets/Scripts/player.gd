@@ -83,6 +83,8 @@ func _physics_process(delta):
 		if is_on_ground() and not pancake:
 			if jump and not attacking:
 				velocity.y = jump_strength
+			else:
+				velocity.y = gravity / 3
 		elif pancake and not is_on_ground():
 			velocity.y = abs(pancake.collider_velocity.y)
 		else:
