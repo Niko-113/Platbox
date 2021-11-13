@@ -14,7 +14,6 @@ func _setup():
 	Engine.time_scale = 1
 	points_1 = 0
 	points_2 = 0
-	print_debug("EEEEE")
 	root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
