@@ -18,6 +18,7 @@ export var move_left = "move_left"
 export var move_up = "move_up"
 export var attack = "attack"
 export var dash_input = "dash"
+export var drop_input = "drop"
 export(NodePath) var opponent_path
 export(NodePath) var respawn_path
 
@@ -51,6 +52,11 @@ func _physics_process(delta):
 	var dash = Input.is_action_just_pressed(dash_input)
 	var attacking = _animator.current_animation == "PlayerAttackAnim"
 	
+	if Input.is_action_just_pressed(drop_input):
+		self.set_collision_layer_bit(1, false)
+	if Input.is_action_just_released(drop_input):
+		self.set_collision_layer_bit(1, true)
+	
 	# TODO: Replace all of this with a proper state machine
 	if not attacking:
 		if not dashing:
@@ -79,6 +85,8 @@ func _physics_process(delta):
 		if is_on_ground() and not pancake:
 			if jump and not attacking:
 				velocity.y = jump_strength
+			else:
+				velocity.y = gravity / 3
 		elif pancake and not is_on_ground():
 			velocity.y = abs(pancake.collider_velocity.y)
 		else:

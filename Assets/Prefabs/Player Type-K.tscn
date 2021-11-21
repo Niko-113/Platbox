@@ -26,6 +26,7 @@ animations = [ {
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 100, 100 )
+collision_layer = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
