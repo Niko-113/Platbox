@@ -52,8 +52,10 @@ func _physics_process(delta):
 	var dash = Input.is_action_just_pressed(dash_input)
 	var attacking = _animator.current_animation == "PlayerAttackAnim"
 	
-	if Input.is_action_pressed(drop_input) and is_on_ground():
-		self.position.y += 1
+	if Input.is_action_just_pressed(drop_input):
+		self.set_collision_layer_bit(1, false)
+	if Input.is_action_just_released(drop_input):
+		self.set_collision_layer_bit(1, true)
 	
 	# TODO: Replace all of this with a proper state machine
 	if not attacking:

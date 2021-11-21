@@ -8,6 +8,8 @@ extents = Vector2( 7.95874, 7.96912 )
 [node name="Platform" type="StaticBody2D"]
 visible = false
 scale = Vector2( 10, 0.2 )
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
