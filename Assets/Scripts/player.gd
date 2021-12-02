@@ -13,6 +13,12 @@ var jumping = false
 var dashing = false
 var velocity = Vector2()
 
+var x_right
+var x_left
+var jump
+var dash
+var attacked
+
 export var move_right = "move_right"
 export var move_left = "move_left"
 export var move_up = "move_up"
@@ -25,6 +31,7 @@ export(NodePath) var respawn_path
 onready var _hitbox = $Weapon
 onready var _animator = $AnimationPlayer
 onready var _sprite = $Sprite
+onready var _sound = $AudioStreamPlayer2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,17 +46,26 @@ func _process(delta):
 		_sprite.flip_v = true
 	else:
 		_sprite.flip_v = false
+		
+		
+
+func process_input():
+	x_right = Input.is_action_pressed(move_right)
+	x_left = Input.is_action_pressed(move_left)
+	jump = Input.is_action_just_pressed(move_up)
+	dash = Input.is_action_just_pressed(dash_input)
+	attacked = Input.is_action_just_pressed(attack)
+
 
 func _physics_process(delta):
+	if not get_node("/root/GameManager").input_disabled:
+		process_input()
 	var _opponent = get_node(opponent_path)
 	self.look_at(Vector2(_opponent.position.x, self.position.y))
-	if Input.is_action_just_pressed(attack):
+	if attacked:
 		_animator.play("PlayerAttackAnim")
 	
-	var x_right = Input.is_action_pressed(move_right)
-	var x_left = Input.is_action_pressed(move_left)
-	var jump = Input.is_action_just_pressed(move_up)
-	var dash = Input.is_action_just_pressed(dash_input)
+	
 	var attacking = _animator.current_animation == "PlayerAttackAnim"
 	
 	if Input.is_action_just_pressed(drop_input):
@@ -64,7 +80,11 @@ func _physics_process(delta):
 			velocity.x = direction * speed
 		
 		if dash and not dashing:
+			_sound.stream = load("res://Assets/Sounds/Dash.wav")
+			_sound.play()
 			dashing = true
+#			if direction == 0:
+#				direction = 1
 			velocity.x = dash_strength * direction
 	elif is_on_ground():	
 		if velocity.x * direction > 0:
@@ -93,6 +113,8 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 	else:
 		velocity.y += gravity * delta
+
+
 
 
 func is_on_ground():

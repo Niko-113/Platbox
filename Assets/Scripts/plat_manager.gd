@@ -2,13 +2,14 @@ extends Node2D
 
 var platforms
 var tokens
+var rng
 
 func _ready():
 	tokens = 4
 	platforms = self.get_children()
 	
 	
-	var rng = RandomNumberGenerator.new()
+	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
 	while tokens >= 4:
@@ -20,12 +21,14 @@ func _ready():
 		
 	
 func check_validity(plat_no):
-	if (plat_no == 0 or plat_no == 5) and tokens > 1:
+	if (plat_no == 0 or plat_no == 5) and tokens > 2:
 		enable_platform(0)
 		enable_platform(5)
-	elif (plat_no == 1 or plat_no == 4) and platforms[0].visible and tokens > 1:
+		enable_platform(rng.randi_range(2, 3))
+	elif (plat_no == 1 or plat_no == 4) and tokens > 2:
 		enable_platform(1)
 		enable_platform(4)
+		enable_platform(2)
 	elif (plat_no == 3) and (platforms[0].visible or platforms[2].visible) and tokens > 0:
 		enable_platform(plat_no)
 	elif (plat_no == 2) and tokens > 0:

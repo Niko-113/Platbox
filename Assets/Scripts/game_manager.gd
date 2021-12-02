@@ -4,6 +4,7 @@ var points_1 = 0
 var points_2 = 0
 var current_scene = null
 var root
+var input_disabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,9 +20,12 @@ func _setup():
 	
 	
 func next_round():
-	get_tree().paused = true
-	yield(get_tree().create_timer(0.5), "timeout")
-	get_tree().paused = false
+	input_disabled = true
+	Engine.time_scale = 0.3
+	yield(get_tree().create_timer(0.2), "timeout")
+	Engine.time_scale = 1
+	input_disabled = false
+	
 	var player_1 = get_node("/root/Fight/Player1")
 	player_1.respawn()
 	var player_2 = get_node("/root/Fight/Player2")
@@ -52,4 +56,6 @@ func game_over(player):
 	
 	var restart_button = get_node("/root/Fight/Control/Results/RestartButton")
 	restart_button.connect("pressed", self, "_setup")
+	restart_button.grab_focus()
+	
 	
