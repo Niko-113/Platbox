@@ -55,7 +55,7 @@ func process_input():
 	jump = Input.is_action_just_pressed(move_up)
 	dash = Input.is_action_just_pressed(dash_input)
 	attacked = Input.is_action_just_pressed(attack)
-	direction = int(x_right) - int(x_left)
+
 
 func _physics_process(delta):
 	if not get_node("/root/GameManager").input_disabled:
@@ -76,11 +76,15 @@ func _physics_process(delta):
 	# TODO: Replace all of this with a proper state machine
 	if not attacking:
 		if not dashing:
+			direction = int(x_right) - int(x_left)
 			velocity.x = direction * speed
 		
 		if dash and not dashing:
+			_sound.stream = load("res://Assets/Sounds/Dash.wav")
 			_sound.play()
 			dashing = true
+#			if direction == 0:
+#				direction = 1
 			velocity.x = dash_strength * direction
 	elif is_on_ground():	
 		if velocity.x * direction > 0:

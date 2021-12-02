@@ -19,6 +19,6 @@ func _on_player_hit(body):
 	var manager = get_node("/root/GameManager")
 	if (not "Player" in body.name) or str(player_no) in body.name or manager.input_disabled:
 		return
-	#get_tree().reload_current_scene()
-	print_debug(body.name + " was hit!")
+	get_parent()._sound.stream = load("res://Assets/Sounds/PlayerHurt.wav")
+	get_parent()._sound.play()
 	manager.addScore(player_no)
