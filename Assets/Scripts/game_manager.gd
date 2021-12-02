@@ -56,5 +56,6 @@ func game_over(player):
 	
 	var restart_button = get_node("/root/Fight/Control/Results/RestartButton")
 	restart_button.connect("pressed", self, "_setup")
+	restart_button.grab_focus()
 	
 	
