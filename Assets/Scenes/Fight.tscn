@@ -55,6 +55,31 @@ shape = SubResource( 2 )
 
 [node name="Platforms" parent="Terrain" instance=ExtResource( 4 )]
 
+[node name="Player1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 198.77, 228.45 )
+opponent_path = NodePath("../Player2")
+respawn_path = NodePath("../RespawnPoints/Respawn1")
+
+[node name="Sprite" parent="Player1" index="1"]
+modulate = Color( 1, 0, 0, 1 )
+
+[node name="Player2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 876.827, 224.212 )
+move_right = "move_right2"
+move_left = "move_left2"
+move_up = "move_up2"
+attack = "attack2"
+dash_input = "dash2"
+drop_input = "drop2"
+opponent_path = NodePath("../Player1")
+respawn_path = NodePath("../RespawnPoints/Respawn2")
+
+[node name="Sprite" parent="Player2" index="1"]
+modulate = Color( 0, 0.952941, 1, 1 )
+
+[node name="Weapon" parent="Player2" index="2"]
+player_no = 2
+
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -89,7 +114,6 @@ __meta__ = {
 }
 
 [node name="Instructions" type="Control" parent="Control"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -146,8 +170,10 @@ margin_bottom = 287.332
 
 [node name="Results" type="Control" parent="Control"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -17.9594
+margin_top = -151.532
+margin_right = 22.0406
+margin_bottom = -111.532
 
 [node name="WinnerText" type="Label" parent="Control/Results"]
 margin_left = 452.669
@@ -178,31 +204,6 @@ position = Vector2( 190.919, 341.754 )
 
 [node name="Respawn2" type="Node2D" parent="RespawnPoints"]
 position = Vector2( 831.546, 342.788 )
-
-[node name="Player1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 198.77, 228.45 )
-opponent_path = NodePath("../Player2")
-respawn_path = NodePath("../RespawnPoints/Respawn1")
-
-[node name="Sprite" parent="Player1" index="1"]
-modulate = Color( 1, 0, 0, 1 )
-
-[node name="Player2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 876.827, 224.212 )
-move_right = "move_right2"
-move_left = "move_left2"
-move_up = "move_up2"
-attack = "attack2"
-dash_input = "dash2"
-drop_input = "drop2"
-opponent_path = NodePath("../Player1")
-respawn_path = NodePath("../RespawnPoints/Respawn2")
-
-[node name="Sprite" parent="Player2" index="1"]
-modulate = Color( 0, 0.952941, 1, 1 )
-
-[node name="Weapon" parent="Player2" index="2"]
-player_no = 2
 
 [editable path="Player1"]
 [editable path="Player2"]

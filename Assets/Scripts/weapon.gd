@@ -16,9 +16,9 @@ func _process(delta):
 
 
 func _on_player_hit(body):
-	if not "Player" in body.name or str(player_no) in body.name:
+	var manager = get_node("/root/GameManager")
+	if (not "Player" in body.name) or str(player_no) in body.name or manager.input_disabled:
 		return
 	#get_tree().reload_current_scene()
 	print_debug(body.name + " was hit!")
-	var manager = get_node("/root/GameManager")
 	manager.addScore(player_no)
