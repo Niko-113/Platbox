@@ -11,6 +11,7 @@ func _ready():
 	_setup()
 
 func _setup():
+	input_disabled = false
 	get_tree().reload_current_scene()
 	Engine.time_scale = 1
 	points_1 = 0
@@ -48,6 +49,7 @@ func addScore(player):
 
 func game_over(player):
 	var results = get_node("/root/Fight/Control/Results")
+	input_disabled = true
 	results.visible = true
 	Engine.time_scale = 0
 	
