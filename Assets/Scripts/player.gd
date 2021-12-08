@@ -5,6 +5,7 @@ var speed = 250
 var jump_strength = -500
 var dash_strength = speed * 2.5
 var gravity = 1000
+var plat_gravity = gravity / 4
 var decel = 20
 
 
@@ -105,8 +106,10 @@ func _physics_process(delta):
 		if is_on_ground() and not pancake:
 			if jump and not attacking:
 				velocity.y = jump_strength
+				_sound.stream = load("res://Assets/Sounds/jump.wav")
+				_sound.play()
 			else:
-				velocity.y = gravity / 3
+				velocity.y = plat_gravity
 		elif pancake and not is_on_ground():
 			velocity.y = abs(pancake.collider_velocity.y)
 		else:
