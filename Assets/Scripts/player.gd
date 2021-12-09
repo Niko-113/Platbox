@@ -5,6 +5,7 @@ var speed = 250
 var jump_strength = -500
 var dash_strength = speed * 2.5
 var gravity = 1000
+var plat_gravity = gravity / 4
 var decel = 20
 
 
@@ -27,6 +28,8 @@ export var dash_input = "dash"
 export var drop_input = "drop"
 export(NodePath) var opponent_path
 export(NodePath) var respawn_path
+
+var sound_player = preload("res://Assets/Prefabs/sound_player.tscn")
 
 onready var _hitbox = $Weapon
 onready var _animator = $AnimationPlayer
@@ -80,8 +83,7 @@ func _physics_process(delta):
 			velocity.x = direction * speed
 		
 		if dash and not dashing:
-			_sound.stream = load("res://Assets/Sounds/Dash.wav")
-			_sound.play()
+			play_sound("Dash")
 			dashing = true
 #			if direction == 0:
 #				direction = 1
@@ -105,8 +107,9 @@ func _physics_process(delta):
 		if is_on_ground() and not pancake:
 			if jump and not attacking:
 				velocity.y = jump_strength
+				play_sound("jump")
 			else:
-				velocity.y = gravity / 3
+				velocity.y = plat_gravity
 		elif pancake and not is_on_ground():
 			velocity.y = abs(pancake.collider_velocity.y)
 		else:
@@ -132,3 +135,8 @@ func respawn():
 	#self.linear_velocity = Vector2()
 	velocity = Vector2()
 	_animator.advance(1)
+	
+func play_sound(sound):
+	var speaker = sound_player.instance() 
+	add_child(speaker)
+	speaker.play_sound("res://Assets/Sounds/" + sound + ".wav")
